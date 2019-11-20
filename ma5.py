@@ -75,7 +75,7 @@ class video_man():
             #read camera
             ret, frame = cap.read()
 
-            # size change
+            #撮影した写真をリサイズ
             frame = cv2.resize(frame, (int(frame.shape[1]/4), int(frame.shape[0]/4)))
             # default frame
             #show! show! show!
@@ -128,7 +128,7 @@ class video_man():
                 areaframe = cv2.rectangle(frame,(x,y),(x+w,y+h),(0,255,0),2)
                 cv2.imwrite('face_pic.jpg',frame)
                 if self.process_flag == 0:
-                    #self.p.starmap(self.face_check) 
+                    #self.p.starmap(self.face_check)
                     p = Process(target=self.face_check)
                     self.jobs.append(p)
                     p.start()
