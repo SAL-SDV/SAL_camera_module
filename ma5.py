@@ -36,6 +36,7 @@ class video_man():
             else:
                 self.video_flag = 1
 
+    #顔認識に関する関数
     def face_check(self):
         self.cascflag = 1
         cascade_path = "haarcascade_frontalface_alt.xml"
@@ -69,6 +70,7 @@ class video_man():
             cv2.imwrite("detected.jpg", image)
         os.remove("face_pic.jpg")
 
+    #メイン処理  撮影、リサイズ、転送を行う
     def main(self):
         cap = cv2.VideoCapture(0)
         while True:
@@ -102,7 +104,6 @@ class video_man():
                 pass
                 #print('Nothing')
             for cnt in contours:
-
                 area = cv2.contourArea(cnt)
                 if max_area < area and area < 10000 and area > 1000:
                     max_area = area;
@@ -122,7 +123,9 @@ class video_man():
                     filerename = d.strftime('%Y:%m:%d:%H:%M:%S') + '.mp4'
                     fps = 10
                     fmt = cv2.VideoWriter_fourcc('m', 'p', '4', 'v')
+                    #mp4で保存
                     videoWriter = cv2.VideoWriter('output.mp4', fmt, fps, (480,360))
+                    #jpgで保存
                     cv2.imwrite('detected.jpg',frame)
                 x,y,w,h = cv2.boundingRect(target)
                 areaframe = cv2.rectangle(frame,(x,y),(x+w,y+h),(0,255,0),2)
@@ -149,7 +152,7 @@ class video_man():
                 # 書き込み
                 videoWriter.write(frame)
                 self.send_frame.append(frame)
-
+-----
                 end=time()
                 if end-self.start >= 10:
                     self.flag = 2
