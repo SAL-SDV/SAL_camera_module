@@ -19,5 +19,6 @@ raspberry-pi:zeroにおいて
 ```
 
 備考
-・市役所サーバの準備ができたら、sensor_event.pyの通信が秘密鍵で行えるようにする事を推奨
 ・cp,paramikoはパッケージをインストールする必要あり（何らかのエラーが発生したら本体をアップデート）
+・市役所サーバの準備ができたら、sensor_event.pyの通信が秘密鍵で行えるようにする事を推奨{}
+・photo_send.pyでは秘密鍵を用いたscpを採用しているが、事前の設定が必要([参考サイト](https://qiita.com/kuro___inu/items/93da8aa9b56847c3a2bf))
