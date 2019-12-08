@@ -17,3 +17,7 @@ raspberry-pi:zeroにおいて
 ・sensor_event.py 1.2.3を行う(メインプログラム)
 ・photo_send.py 4を行う(sensor_event.pyからimportされる)
 ```
+
+備考
+・市役所サーバの準備ができたら、sensor_event.pyの通信が秘密鍵で行えるようにする事を推奨
+・cp,paramikoはパッケージをインストールする必要あり（何らかのエラーが発生したら本体をアップデート）
