@@ -7,20 +7,19 @@ raspberry-pi:zeroにおいて
 4. 動画をhome_moduleに送信する
 という4つの処理を行うプログラムです。
 
-## 旧プログラム
+## 旧コード
 - ma_4.0.py 動作しません。
 - ma_5.py   常時撮影し動体検知を行う。動画検知後、動画を保存しhome_moduleに送信する。途中カスケード分類機にかけて顔認識も行っているが、未完成の模様。
 
-## 新プログラム
-- sensor_event.py 1.2.3を行う(メインプログラム)
+## 新コード
+- sensor.py 1.2.3を行う(メインプログラム)
 - photo_send.py 4を行う(sensor_event.pyからimportされる)
+- check_sensor.py 人感センサの値を表示する（デバック用）
 
 # 使い方
-sudo python3 senser_event.py
+sudo python3 senser.py
 
-もしカメラモジュール単体で動作確認をしたいのであればsenser_event.pyの
-`send.send(name)`  
-をコメントアウト
+もしカメラモジュール単体で動作確認をしたい(動画を送りたくない)のであればsenser_event.pyの`send.send(name)`をコメントアウト
 
 
 ### 備考

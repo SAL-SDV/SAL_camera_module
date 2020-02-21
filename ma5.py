@@ -36,7 +36,6 @@ class video_man():
             else:
                 self.video_flag = 1
 
-    #顔認識に関する関数
     def face_check(self):
         self.cascflag = 1
         cascade_path = "haarcascade_frontalface_alt.xml"
@@ -70,14 +69,13 @@ class video_man():
             cv2.imwrite("detected.jpg", image)
         os.remove("face_pic.jpg")
 
-    #メイン処理  撮影、リサイズ、転送を行う
     def main(self):
         cap = cv2.VideoCapture(0)
         while True:
             #read camera
             ret, frame = cap.read()
 
-            #撮影した写真をリサイズ
+            # size change
             frame = cv2.resize(frame, (int(frame.shape[1]/4), int(frame.shape[0]/4)))
             # default frame
             #show! show! show!
@@ -104,6 +102,7 @@ class video_man():
                 pass
                 #print('Nothing')
             for cnt in contours:
+
                 area = cv2.contourArea(cnt)
                 if max_area < area and area < 10000 and area > 1000:
                     max_area = area;
@@ -123,15 +122,13 @@ class video_man():
                     filerename = d.strftime('%Y:%m:%d:%H:%M:%S') + '.mp4'
                     fps = 10
                     fmt = cv2.VideoWriter_fourcc('m', 'p', '4', 'v')
-                    #mp4で保存
                     videoWriter = cv2.VideoWriter('output.mp4', fmt, fps, (480,360))
-                    #jpgで保存
                     cv2.imwrite('detected.jpg',frame)
                 x,y,w,h = cv2.boundingRect(target)
                 areaframe = cv2.rectangle(frame,(x,y),(x+w,y+h),(0,255,0),2)
                 cv2.imwrite('face_pic.jpg',frame)
                 if self.process_flag == 0:
-                    #self.p.starmap(self.face_check)
+                    #self.p.starmap(self.face_check) 
                     p = Process(target=self.face_check)
                     self.jobs.append(p)
                     p.start()
@@ -152,7 +149,7 @@ class video_man():
                 # 書き込み
                 videoWriter.write(frame)
                 self.send_frame.append(frame)
------
+
                 end=time()
                 if end-self.start >= 10:
                     self.flag = 2
@@ -167,7 +164,7 @@ class video_man():
                     cv2.imwrite(filerename2,self.send_frame[tmp])
                 with paramiko.SSHClient() as ssh:
                     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-                    ssh.connect(hostname='172.16.162.153',port=22,username='pi',password='raspberry')
+                    ssh.connect(hostname='192.168.13.40',port=22,username='pi',password='raspberry')
                     with scp.SCPClient(ssh.get_transport()) as scp2:
                         scp2.put(filerename,'~/SAL/viewer/public/movie')
                         scp2.put(filerename2,'~/SAL/viewer/public/images')
