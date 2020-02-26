@@ -8,7 +8,6 @@ GPIO.setup(26, GPIO.IN) #人感センサのピン番号
 import photo_send as send
 
 save_folder = "movie/"; #動画を保存するフォルダを指定
-print("a")
 
 while True:
     inputValue = GPIO.input(26)
@@ -22,14 +21,15 @@ while True:
             name = save_folder+d.strftime('%Y:%m:%d:%H:%M:%S') + '.h264' #ファイル名指定
             camera.start_recording(name)
             time.sleep(5)
+
+            inputValue = GPIO.input(26)
             while(inputValue):
                 inputValue = GPIO.input(26)
                 time.sleep(1)
                 print("rec")
 
-            if(inputValue == False):  #反応が消えたら
-                camera.stop_recording()
-                send.send(name) #動画をホームモジュールに送信
-                print("scp_OK!")
+            camera.stop_recording()
+            send.send(name) #動画をホームモジュールに送信
+            print("scp_OK!")
     time.sleep(1)
 

@@ -2,7 +2,7 @@
 import paramiko
 import scp as scp
 
-#ここでは自前のラズパイでテスト
+#ホームモジュールの情報
 hostname = '192.168.90.29'
 port = 22
 username = 'pi'
