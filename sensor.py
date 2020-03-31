@@ -21,7 +21,7 @@ while True:
             name = save_folder+d.strftime('%Y:%m:%d:%H:%M:%S') + '.h264' #ファイル名指定
             camera.start_recording(name)
             time.sleep(5)
-
+            #-----撮影開始-----
             inputValue = GPIO.input(26)
             while(inputValue):
                 inputValue = GPIO.input(26)
@@ -29,6 +29,7 @@ while True:
                 print("rec")
 
             camera.stop_recording()
+            #-----撮影終了-----
             send.send(name) #動画をホームモジュールに送信
             print("scp_OK!")
     time.sleep(1)
