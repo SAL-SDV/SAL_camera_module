@@ -13,7 +13,7 @@ raspberry-pi:zeroにおいて
 
 ## 新コード
 - sensor.py 1.2.3を行う(メインプログラム)
-- photo_send.py 4を行う(sensor_event.pyからimportされる)
+- photo_send.py 4を行う(sensor.pyからimportされる)
 - check_sensor.py 人感センサの値を表示する（デバック用）
 
 # 使い方
