@@ -19,7 +19,7 @@ raspberry-pi:zeroにおいて
 # 使い方
 sudo python3 senser.py
 
-もしカメラモジュール単体で動作確認をしたい(動画を送りたくない)のであればsenser_event.pyの`send.send(name)`をコメントアウト
+もしカメラモジュール単体で動作確認をしたい(動画を送りたくない)のであればsenser.pyの`send.send(name)`をコメントアウト
 
 
 ### 備考
